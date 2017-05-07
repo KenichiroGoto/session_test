@@ -1,0 +1,13 @@
+<h1>ブログ一覧</h1>
+<%= notice %>
+
+<% @blogs.each do |blog| %>
+  <p>タイトル</p>
+  <p><%= blog.title %></p>
+  <p>ブログ本文</p>
+  <p><%= blog.content %></p>
+  <%= link_to "編集", edit_blog_path(blog.id) %>
+  <%= link_to "削除", blog_path(blog.id), method: :delete, data:{confirm: "本当に削除して良いですか？"} %>
+<% end %>
+<%= link_to "ブログを作成する", new_blog_path %>
+<%= link_to "ログアウト", user_path(@user.id), method: :delete %>

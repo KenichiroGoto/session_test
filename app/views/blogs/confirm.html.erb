@@ -1,0 +1,18 @@
+<h3>以下の内容で送信して良いですか？</h3>
+
+<%= form_for(@blog) do |f| %>
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :content %>
+
+  <p>タイトル</p>
+  <p><%= @blog.title %></p>
+  <p>ブログ本文</p>
+  <p><%= @blog.content %></p>
+  <%= f.submit "ブログを投稿する" %>
+<% end %>
+
+<%= form_for(@blog, url: new_blog_path, method: "get") do |f| %>
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :content %>
+  <%= f.submit "戻る", name: "back" %>
+<% end %>
