@@ -1,13 +1,9 @@
 class BlogsController < ApplicationController
+  before_action :login_check
   before_action :set_blog, only: [:edit, :update, :destroy]
 
     def index
       @blogs = Blog.all
-      if session[:user_id]
-        @user = User.find(session[:user_id])
-      else
-        redirect_to root_path, notice: "ログインして下さい。"
-      end
     end
 
     def new
@@ -48,6 +44,14 @@ class BlogsController < ApplicationController
     def confirm
       @blog = Blog.new(blogs_params)
       render :new if @blog.invalid?
+    end
+
+    def login_check
+      if session[:user_id]
+        @user = User.find(session[:user_id])
+      else
+        redirect_to root_path, notice: "ログインして下さい。"
+      end
     end
 
   private
